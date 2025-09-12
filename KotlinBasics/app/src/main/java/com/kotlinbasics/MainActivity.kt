@@ -42,6 +42,19 @@ fun week02Variables() {
 
     println("Course : $courseName")
     println("Week : $week")
+
+    println("== Kotlin Variables ==")
+
+    val name : String = "Android"
+    var version : Double = 8.1
+    println("Hello $name $version")
+
+    val age : Int = 23
+    val height : Double = 173.6
+    val isStudent : Boolean = true
+
+    println("Age : $age, Height : $height, Student : $isStudent")
+
 }
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
