@@ -28,6 +28,7 @@ class MainActivity : ComponentActivity() {
             }
         }
         week02Variables()
+        week02Functions()
     }
 }
 
@@ -55,6 +56,14 @@ fun week02Variables() {
 
     println("Age : $age, Height : $height, Student : $isStudent")
 
+}
+
+fun week02Functions() {
+    println("== Week02 Functions ==")
+
+    fun greet(name: String) = "Hello, $name!"
+
+    println(greet("Android Developer"))
 }
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
