@@ -1,6 +1,7 @@
 package com.kotlinbasics
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -27,9 +28,24 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
-        week02Variables()
-        week02Functions()
+//        week02Variables()
+//        week02Functions()
+//        week03Classes()
+        week03Collections()
     }
+}
+
+private fun week03Collections() {
+    Log.d("KotlinWeek03","== Kotlin Collections ==")
+
+    val fruits = listOf("apple", "banana", "Orange")
+//    fruits.add("kiwi")
+    Log.d("KotlinWeek03","Fruits : $fruits")
+
+    for(fruit in fruits){
+        Log.d("KotlinWeek03","Fruit : $fruit")
+    }
+
 }
 
 fun week02Variables() {
@@ -87,6 +103,31 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
         text = "Hello $name!",
         modifier = modifier
     )
+}
+
+fun week03Classes() {
+    println("== Kotlin Classes ==")
+
+    class Student {
+        var name: String = ""
+        var age: Int = 0
+
+        fun introduse() {
+            println("Hi, I'm $name and I'm $age years old.")
+        }
+    }
+    val student = Student()
+    student.name = "Song"
+    student.age = 23
+    student.introduse()
+
+    class Person(val name: String, val age: Int)
+
+    val person1 = Person("Lee", 24)
+    val person2 = Person("Lee", 24)
+
+    println("Person1: $person1")
+    println("Equal? : ${person1 == person2}")
 }
 
 @Preview(showBackground = true)
