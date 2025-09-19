@@ -11,6 +11,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import com.kotlinbasics.ui.theme.KotlinBasicsTheme
 
@@ -137,20 +138,35 @@ fun week03Classes() {
     person1.introduce()
     person1.birthday()
 
-    class Animal(var species: String){
+    open class Animal(var species: String){
         var weight: Double = 0.0
         constructor(species: String, weight: Double) : this(species){
             this.weight = weight
             Log.d("KotlinWeek03", "$species 의 무게 : 이제 $weight kg")
         }
-        fun makeSound() {
+        open fun makeSound() {
             Log.d("KotlinWeek03", "$species 가 소리를 냅니다")
         }
     }
     val puppy = Animal("강아지", 6.5)
     puppy.makeSound()
 
-    class Dog()
+    class Dog(species: String, weight: Double, val breed: String) : Animal(species, weight){
+        override fun makeSound(){
+            Log.d("KotlinWeek03", "$breed ($species) 가 멍멍 짖습니다.")
+        }
+    }
+
+    val dog = Dog("개", 12.5, "골든 리트리버")
+    dog.makeSound()
+
+    data class Book(val title: String, var author: String, val pages: Int)
+
+    val book1 = Book("코틀린 입문", "Kim", 400)
+    val book2 = Book("코틀린 입문", "Kim", 400)
+
+    Log.d("KotlinWeek03", "book1 == book2: ${book1 == book2}")
+    Log.d("KotlinWeek03", "book1: $book1")
 //    class Student {
 //        var name: String = ""
 //        var age: Int = 0
