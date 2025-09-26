@@ -26,7 +26,7 @@
         />
 
     <Button
-        android:id="@+id/buttonGreet"
+        android:id="@+id/buttonGreeting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="인사하기 버튼"
