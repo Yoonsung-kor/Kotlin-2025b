@@ -1,6 +1,7 @@
 package com.appweek04
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -23,9 +24,11 @@ class MainActivity : AppCompatActivity() {
             if (name.isNotEmpty()) {
                 textViewGreeting.text = "안녕, $(name)님~"
                 textViewGreeting.visibility = View.VISIBLE
+                Log.d("KotlinWeek04App", "안녕, $(name)님~")
             } else {
                 textViewGreeting.text = "너의 이름은?"
                 textViewGreeting.visibility = View.VISIBLE
+                Log.d("KotlinWeek04App", "너의 이름은?")
             }
 
         }
