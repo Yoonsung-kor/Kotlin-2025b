@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 class GreetingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activitiy_greeting)
+        setContentView(R.layout.activity_greeting)
 
 
         val editTextName = findViewById<EditText>(R.id.editTextName)
