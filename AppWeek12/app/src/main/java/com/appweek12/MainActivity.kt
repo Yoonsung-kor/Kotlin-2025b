@@ -4,7 +4,10 @@ import android.graphics.Color
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
 import com.appweek12.databinding.ActivityMainBinding
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -20,14 +23,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupObservers() {
-        viewModel.count.observe(this) { count ->
-            binding.textViewCount.text = count.toString()
-
-
-            when {
-                count > 0 -> binding.textViewCount.setTextColor(Color.BLUE)
-                count < 0 -> binding.textViewCount.setTextColor(Color.RED)
-                else -> binding.textViewCount.setTextColor(Color.BLACK)
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED){
+                viewModel.count.collect{
+                    count -> binding.textViewCount.text = count.toString()
+                    when {
+                        count > 0 -> binding.textViewCount.setTextColor(Color.BLUE)
+                        count < 0 -> binding.textViewCount.setTextColor(Color.RED)
+                        else -> binding.textViewCount.setTextColor(Color.BLACK)
+                    }
+                }
             }
         }
     }
@@ -35,8 +40,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupListeners() {
         binding.buttonPlus.setOnClickListener {
-//            count++
-//            updateCountDisplay()
             viewModel.increment()
         }
         binding.buttonMinus.setOnClickListener {
