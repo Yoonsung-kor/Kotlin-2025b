@@ -1,47 +1,27 @@
 package com.appweek13a
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.Flow
 
-class StudentViewModel(application: Application) : AndroidViewModel(application) {
+class StudentRepository(private val studentDao: StudentDao) {
 
-    private val repository = StudentRepository(
-        StudentDatabase.getDatabase(application).studentDao()
-    )
-
-    private val _students = MutableStateFlow<List<Student>>(emptyList())
-    val students: StateFlow<List<Student>> = _students.asStateFlow()
-
-    init {
-        viewModelScope.launch {
-            repository.getAllStudents().collect { list ->
-                _students.value = list
-            }
-        }
+    fun getAllStudents(): Flow<List<Student>> {
+        return studentDao.getAllStudents()
     }
 
-    fun addStudent(name: String) {
-        if (name.isBlank()) return
-
-        viewModelScope.launch {
-            repository.addStudent(name)
-        }
+    suspend fun addStudent(name: String, department: String = "Computer Science", grade: String = "1st Year") {
+        val student = Student(
+            name = name,
+            department = department,
+            grade = grade
+        )
+        studentDao.insertStudent(student)
     }
 
-    fun deleteStudent(student: Student) {
-        viewModelScope.launch {
-            repository.deleteStudent(student)
-        }
+    suspend fun deleteStudent(student: Student) {
+        studentDao.deleteStudent(student)
     }
 
-    fun deleteAllStudents() {
-        viewModelScope.launch {
-            repository.deleteAllStudents()
-        }
+    suspend fun deleteAllStudents() {
+        studentDao.deleteAllStudents()
     }
 }
